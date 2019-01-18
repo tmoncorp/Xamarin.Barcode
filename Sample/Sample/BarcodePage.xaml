@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Sample.BarcodePage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Tmon.Toolkit.Barcode;assembly=Tmon.Toolkit.Barcode"
+             xmlns:enums="clr-namespace:Tmon.Toolkit.Barcode.Enums;assembly=Tmon.Toolkit.Barcode"
+             xmlns:vm="clr-namespace:Sample">
+    <ContentPage.BindingContext>
+        <vm:MainVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <!--  바코드 스캐너  -->
+            <controls:BarcodeScanner x:Name="barcodeScanner"
+                                     Grid.RowSpan="3"
+                                     BarcodeDetectedCommand="{Binding BarcodeDetectedCommand}"
+                                     ErrorOccuredCommand="{Binding ErrorOccuredCommand}"
+                                     DelayBetweenDetections="1000"
+                                     IsPreviewing="{Binding IsPreviewing}"
+                                     IsScanning="True"
+                                     IsTorchOn="{Binding IsTorchOn}"
+                                     Resolution="High">
+                <!--  스캔 가능한 포멧 리스트(미설정 시 모든 지원하는 포멧 스캔)  -->
+                <x:Arguments>
+                    <x:Array Type="{x:Type enums:BarcodeFormat}">
+                        <enums:BarcodeFormat>QrCode</enums:BarcodeFormat>
+                        <enums:BarcodeFormat>Itf</enums:BarcodeFormat>
+                    </x:Array>
+                </x:Arguments>
+                <!--  스캔 활성화 영역 설정(미설정 시 전체 영역에서 스캔)  -->
+                <Grid x:Name="scanArea"
+                      HeightRequest="200"
+                      HorizontalOptions="CenterAndExpand"
+                      VerticalOptions="CenterAndExpand"
+                      WidthRequest="150"
+                      Margin="50,100,0,0">
+                    <Grid WidthRequest="3" BackgroundColor="White" HorizontalOptions="Start" />
+                    <Grid WidthRequest="3" BackgroundColor="White" HorizontalOptions="End" />
+                    <Grid HeightRequest="3" BackgroundColor="White" VerticalOptions="Start" />
+                    <Grid HeightRequest="3" BackgroundColor="White" VerticalOptions="End" />
+                </Grid>
+            </controls:BarcodeScanner>
+            <Label FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Text="{Binding BarcodeString}"
+                   TextColor="White"
+                   VerticalOptions="Center" />
+            <Button Grid.Row="2"
+                    Margin="100,0,0,0"
+                    Clicked="Button_Clicked"
+                    HorizontalOptions="Start"
+                    Text="Next" />
+            <Switch Grid.Row="2"
+                    HorizontalOptions="Start"
+                    IsToggled="{Binding IsPreviewing}" />
+            <Switch Grid.Row="2"
+                    HorizontalOptions="End"
+                    IsToggled="{Binding IsTorchOn}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

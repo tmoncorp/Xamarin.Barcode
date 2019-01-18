@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1367ba34-4b90-4916-bee6-106f826f1a9c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Tmon.Toolkit.Barcode</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\BarcodeFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\Resolution.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\ScannerState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CommandExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeScanner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BarcodeData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Log\Log.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Tmon.Toolkit.Barcode</id>
+    <version>$version$</version>
+    <title>Barcode scanner for Xamarin (Android and iOS)</title>
+    <authors>Tmon mobile labs</authors>
+    <owners>Tmon</owners>
+    <projectUrl>https://bitbucket.tmon.co.kr/bitbucket/projects/XAM/repos/toolkit.barcode/browse</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Barcode scanner for Xamarin (Android and iOS)</description>
+    <releaseNotes>카메라/바코드 서비스 에러 발생시 통지(Andoroid)</releaseNotes>
+    <copyright>Tmon Inc.</copyright>
+  </metadata>
+  <files>
+    <!-- iOS reference assemblies -->
+    <file src="..\Tmon.Toolkit.Barcode.iOS\bin\$configuration$\Tmon.Toolkit.Barcode.dll" target="lib\xamarinios\Tmon.Toolkit.Barcode.dll" />
+    <file src="..\Tmon.Toolkit.Barcode.iOS\bin\$configuration$\Tmon.Toolkit.Barcode.pdb" target="lib\xamarinios\Tmon.Toolkit.Barcode.pdb" />
+
+    <!-- Android reference assemblies -->
+    <file src="..\Tmon.Toolkit.Barcode.Android\bin\$configuration$\Tmon.Toolkit.Barcode.dll" target="lib\MonoAndroid\Tmon.Toolkit.Barcode.dll" />
+    <file src="..\Tmon.Toolkit.Barcode.Android\bin\$configuration$\Tmon.Toolkit.Barcode.pdb" target="lib\MonoAndroid\Tmon.Toolkit.Barcode.pdb" />
+  </files>
+</package>

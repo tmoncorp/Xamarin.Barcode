@@ -1,0 +1,61 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>6CAFC0C6-A428-4d30-A9F9-700E829FEA51</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MyApplication</RootNamespace>
+    <AssemblyName>MyApplication</AssemblyName>
+    <Name>Nuget</Name>
+    <PostBuildScript>$version="1.0.2.1-beta"
+$pkgDir="nupkg"
+
+# 해당 버전을 서버에서 삭제 (다시 업로드 하는 경우만 사용)
+#nuget delete $(SolutionName) $version tmon -Source http://tmon-mobilesv/nuget/nuget
+
+#nuspec 파일을 기반으로 nuget 패키지를 생성
+nuget pack $(ProjectDir)$(SolutionName).nuspec -Version $version -OutputDirectory $pkgDir -Properties Configuration=Release
+
+#nuget패키지를 서버에 업로드 
+nuget push $pkgDir\$(SolutionName).$version.nupkg tmon -Source http://tmon-mobilesv/nuget/nuget</PostBuildScript>
+    <PreBuildScript>
+    </PreBuildScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tmon.Toolkit.Barcode.Android\Tmon.Toolkit.Barcode.Android.csproj">
+      <Name>Tmon.Toolkit.Barcode.Android</Name>
+      <Project>{c293c285-0503-48c8-be66-0eb5e196d65a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tmon.Toolkit.Barcode.iOS\Tmon.Toolkit.Barcode.iOS.csproj">
+      <Name>Tmon.Toolkit.Barcode.iOS</Name>
+      <Project>{17321de4-2878-46b7-80d2-9bc283f339a4}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Script.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tmon.Toolkit.Barcode.nuspec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets" Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
+</Project>
