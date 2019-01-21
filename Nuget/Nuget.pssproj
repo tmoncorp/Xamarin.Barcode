@@ -20,6 +20,8 @@ nuget pack $(ProjectDir)$(SolutionName).nuspec -Version $version -OutputDirector
 nuget push $pkgDir\$(SolutionName).$version.nupkg tmon -Source http://tmon-mobilesv/nuget/nuget</PostBuildScript>
     <PreBuildScript>
     </PreBuildScript>
+    <PackageEntryPoint>Script.ps1</PackageEntryPoint>
+    <DotNetVersion>v4.7.1</DotNetVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
